@@ -112,7 +112,7 @@ src/
 
 ## Despliegue
 
-El workflow `.github/workflows/report.yml` ejecuta automaticamente el reporte de mermas todos los dias a las **09:30 AM Bolivia (13:30 UTC)**.
+El workflow `.github/workflows/report.yml` ejecuta automaticamente el reporte de mermas todos los dias a las **11:00 AM Bolivia (15:00 UTC)**.
 
 ### 1. Agregar los secrets en GitHub
 
