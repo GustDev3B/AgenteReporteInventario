@@ -116,19 +116,7 @@ El workflow `.github/workflows/report.yml` ejecuta automaticamente el reporte de
 
 ### 1. Agregar los secrets en GitHub
 
-Ir a **Settings > Secrets and variables > Actions > New repository secret** y agregar cada variable:
-
-| Secret | Descripcion |
-|--------|-------------|
-| `ANTHROPIC_API_KEY` | API key de Anthropic |
-| `HANA_HOST` | Host del servidor SAP HANA |
-| `HANA_PORT` | Puerto SAP HANA (si es distinto a 30015) |
-| `HANA_USER` | Usuario SAP HANA |
-| `HANA_PASS` | Contrasena SAP HANA |
-| `SENDGRID_API_KEY` | API key de SendGrid |
-| `REPORT_FROM_EMAIL` | Email remitente verificado en SendGrid |
-| `REPORT_RECIPIENTS` | Destinatarios separados por coma |
-| `LLM_MODEL` | Modelo Claude (opcional, default: `claude-sonnet-4-6`) |
+Ir a **Settings > Secrets and variables > Actions > New repository secret** y agregar las variables listadas en la seccion [Variables de entorno](#variables-de-entorno).
 
 ### 2. Cambiar el horario del cron
 
@@ -137,7 +125,7 @@ Editar la linea `cron` en `.github/workflows/report.yml`:
 ```yaml
 on:
   schedule:
-    - cron: "30 13 * * *"  # minuto hora dia mes dia_semana (UTC)
+    - cron: "0 15 * * *"  # minuto hora dia mes dia_semana (UTC)
 ```
 
 Ejemplos utiles:
