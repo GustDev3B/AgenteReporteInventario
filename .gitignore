@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.bak
+.DS_Store
+*.log
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.iml
+.prettier*
+coverage/
+reports/
