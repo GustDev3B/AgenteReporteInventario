@@ -13,7 +13,12 @@ const HELP_TEXT = `Comandos disponibles:
   /report-1 - Generar y enviar el reporte semanal de inventario (últimos 7 días)
   /report-2 - Generar y enviar el reporte mensual de inventario (mes en curso)
   /report-3 - Generar y enviar el reporte anual de inventario (año en curso)
+  /report-4 - Generar y enviar el reporte de mermas del año en curso
   /help     - Mostrar esta ayuda
+
+También puedes pedir un reporte personalizado en lenguaje natural, por ejemplo:
+  "genera un reporte de los 20 SKUs con mayor valor de inventario"
+  "quiero un reporte de salidas por motivo del mes pasado"
 `;
 
 export async function runChatMode(): Promise<void> {
@@ -106,14 +111,14 @@ export async function runChatMode(): Promise<void> {
         return;
       }
 
-      const reportCommands: Record<string, { period: string; label: string }> = {
+      const inventoryReportCommands: Record<string, { period: string; label: string }> = {
         "/report-1": { period: "week",  label: "semanal (últimos 7 días)" },
         "/report-2": { period: "month", label: "mensual (mes en curso)" },
         "/report-3": { period: "year",  label: "anual (año en curso)" },
       };
 
-      if (userInput in reportCommands) {
-        const { period, label } = reportCommands[userInput];
+      if (userInput in inventoryReportCommands) {
+        const { period, label } = inventoryReportCommands[userInput];
         const reportPrompt =
           `Genera y envía el reporte ${label} de inventario: ` +
           `1. Obtén los datos con get_inventory_data usando period="${period}". ` +
@@ -127,6 +132,27 @@ export async function runChatMode(): Promise<void> {
         } catch (error) {
           console.error(
             `❌ Error al generar reporte: ${error instanceof Error ? error.message : String(error)}\n`
+          );
+        }
+
+        promptUser();
+        return;
+      }
+
+      if (userInput === "/report-4") {
+        const mermasPrompt =
+          "Genera y envía el reporte de mermas del año en curso: " +
+          "1. Obtén los datos con get_mermas_data. " +
+          "2. Analiza los porcentajes: identifica tiendas con mayor % de mermas, meses problemáticos y tendencias. " +
+          "3. Construye el HTML con build_mermas_report pasando ese análisis. " +
+          "4. Envíalo con send_report_email a los destinatarios configurados. " +
+          "5. Al final dame un resumen con los hallazgos más importantes.";
+
+        try {
+          await sendMessage(mermasPrompt);
+        } catch (error) {
+          console.error(
+            `❌ Error al generar reporte de mermas: ${error instanceof Error ? error.message : String(error)}\n`
           );
         }
 

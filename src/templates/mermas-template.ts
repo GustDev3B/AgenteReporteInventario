@@ -38,7 +38,7 @@ function bgPct(pct: number): string {
   return "#fdecea";
 }
 
-export function buildMermasReport(data: MermasQueryResults): string {
+export function buildMermasReport(data: MermasQueryResults, analisis?: string): string {
   const currentMonth = new Date().getMonth() + 1;
   const meses = Array.from({ length: currentMonth }, (_, i) => i + 1);
 
@@ -157,6 +157,17 @@ export function buildMermasReport(data: MermasQueryResults): string {
             ${leyenda}
           </table>
         </td></tr>
+
+        ${analisis ? `
+        <!-- Análisis -->
+        <tr><td style="padding:0 24px 24px 24px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fff8f4;border-left:4px solid #e8590c;border-radius:4px;">
+            <tr><td style="padding:16px 20px;">
+              <p style="margin:0 0 8px 0;font-size:13px;font-weight:bold;color:#e8590c;${FONT}">Análisis</p>
+              <p style="margin:0;font-size:13px;color:#333;line-height:1.6;${FONT}; white-space:pre-line;">${esc(analisis)}</p>
+            </td></tr>
+          </table>
+        </td></tr>` : ""}
 
         <!-- Footer -->
         <tr><td style="background-color:#fff4ec;padding:16px 24px;border-top:1px solid #e0e0e0;">

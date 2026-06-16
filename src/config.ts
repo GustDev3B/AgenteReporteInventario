@@ -3,10 +3,8 @@ import { z } from "zod";
 
 const envSchema = z.object({
   ANTHROPIC_API_KEY: z.string().min(1, "ANTHROPIC_API_KEY es requerido"),
-  HANA_HOST: z.string().min(1, "HANA_HOST es requerido"),
-  HANA_PORT: z.coerce.number().default(30015),
-  HANA_USER: z.string().min(1, "HANA_USER es requerido"),
-  HANA_PASS: z.string().min(1, "HANA_PASS es requerido"),
+  INVENTORY_API_URL: z.string().url("INVENTORY_API_URL debe ser una URL válida"),
+  INVENTORY_API_KEY: z.string().min(1, "INVENTORY_API_KEY es requerido"),
   SENDGRID_API_KEY: z.string().min(1, "SENDGRID_API_KEY es requerido"),
   REPORT_FROM_EMAIL: z
     .string()

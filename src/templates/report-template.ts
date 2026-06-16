@@ -88,7 +88,7 @@ function tabla(inner: string): string {
 // Secciones del reporte
 // ─────────────────────────────────────────────────────────────
 
-function seccionKPIs(q1: QueryResults["q1"]): string {
+function seccionKPIs(q1: QueryResults["q1Resumen"]): string {
   if (!q1) {
     return seccion("Resumen general") + `<tr><td>${tabla(sinDatos())}</td></tr>`;
   }
@@ -115,7 +115,7 @@ function seccionKPIs(q1: QueryResults["q1"]): string {
   );
 }
 
-function seccionEstados(q2: QueryResults["q2"]): string {
+function seccionEstados(q2: QueryResults["q2Estados"]): string {
   let body: string;
   if (!q2 || q2.length === 0) {
     body = sinDatos();
@@ -133,7 +133,7 @@ function seccionEstados(q2: QueryResults["q2"]): string {
   return seccion("Estados de stock") + `<tr><td>${tabla(body)}</td></tr>`;
 }
 
-function seccionSalidas(q3: QueryResults["q3"], rango: string): string {
+function seccionSalidas(q3: QueryResults["q3Salidas"], rango: string): string {
   let body: string;
   if (!q3 || q3.length === 0) {
     body = sinDatos();
@@ -158,7 +158,7 @@ function seccionSalidas(q3: QueryResults["q3"], rango: string): string {
   );
 }
 
-function seccionGrupos(q4: QueryResults["q4"]): string {
+function seccionGrupos(q4: QueryResults["q4Grupos"]): string {
   let body: string;
   if (!q4 || q4.length === 0) {
     body = sinDatos();
@@ -179,7 +179,7 @@ function seccionGrupos(q4: QueryResults["q4"]): string {
   );
 }
 
-function seccionSkus(q5: QueryResults["q5"], rango: string): string {
+function seccionSkus(q5: QueryResults["q5TopSkus"], rango: string): string {
   let body: string;
   if (!q5 || q5.length === 0) {
     body = sinDatos();
@@ -206,7 +206,7 @@ function seccionObjetivo(objetivo: string): string {
   </td></tr>`;
 }
 
-function seccionResumenMovimientos(q6: QueryResults["q6"], rango: string): string {
+function seccionResumenMovimientos(q6: QueryResults["q6Movimientos"], rango: string): string {
   if (!q6) return "";
 
   const kpi = (label: string, valor: string, sub: string) => `
@@ -231,7 +231,7 @@ function seccionResumenMovimientos(q6: QueryResults["q6"], rango: string): strin
   );
 }
 
-function seccionGruposSalidas(q7: QueryResults["q7"], rango: string): string {
+function seccionGruposSalidas(q7: QueryResults["q7SalidasPorGrupo"], rango: string): string {
   let body: string;
   if (!q7 || q7.length === 0) {
     body = sinDatos();
@@ -300,12 +300,12 @@ export function buildInventoryReport(
         <tr><td style="padding:8px 24px 24px 24px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
             ${seccionObjetivo(period.objetivo)}
-            ${seccionKPIs(data.q1)}
-            ${seccionResumenMovimientos(data.q6, period.rango)}
-            ${seccionEstados(data.q2)}
-            ${seccionSalidas(data.q3, period.rango)}
-            ${seccionGruposSalidas(data.q7, period.rango)}
-            ${seccionSkus(data.q5, period.rango)}
+            ${seccionKPIs(data.q1Resumen)}
+            ${seccionResumenMovimientos(data.q6Movimientos, period.rango)}
+            ${seccionEstados(data.q2Estados)}
+            ${seccionSalidas(data.q3Salidas, period.rango)}
+            ${seccionGruposSalidas(data.q7SalidasPorGrupo, period.rango)}
+            ${seccionSkus(data.q5TopSkus, period.rango)}
             ${seccionAnalisis(analisis)}
           </table>
         </td></tr>

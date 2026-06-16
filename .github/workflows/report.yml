@@ -13,10 +13,8 @@ jobs:
 
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      HANA_HOST: ${{ secrets.HANA_HOST }}
-      HANA_PORT: ${{ secrets.HANA_PORT }}
-      HANA_USER: ${{ secrets.HANA_USER }}
-      HANA_PASS: ${{ secrets.HANA_PASS }}
+      INVENTORY_API_URL: ${{ secrets.INVENTORY_API_URL }}
+      INVENTORY_API_KEY: ${{ secrets.INVENTORY_API_KEY }}
       SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
       REPORT_FROM_EMAIL: ${{ secrets.REPORT_FROM_EMAIL }}
       REPORT_RECIPIENTS: ${{ secrets.REPORT_RECIPIENTS }}
